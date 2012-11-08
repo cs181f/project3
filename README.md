@@ -8,8 +8,8 @@
 11/18 Component Designs  
 
 * [Linnea](https://github.com/cs181f/project3/issues/5)  
-* [Jesse](https://github.com/cs181f/project3/issues/6)  
-* [Brennen](https://github.com/cs181f/project3/issues/7)  
+* [Jesse](https://github.com/cs181f/project3/issues/7)  
+* [Brennen](https://github.com/cs181f/project3/issues/6)  
 
 11/18 [Develop Test Plan](https://github.com/cs181f/project3/issues/8)  
 11/19-11/30 [Design Review](https://github.com/cs181f/project3/issues/9)  
