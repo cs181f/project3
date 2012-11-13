@@ -70,6 +70,7 @@ The JSON API exposes the following routes:
 * '/build'
 
 This route handles Github Webhooks with commit data and CLI build commands. This will enqueue the appropriate Build with the information is parses from the JSON data and start a Worker Thread if one is not already running. It must respond to POST HTTP requests and return a 200OK status code if the build is successfully enqueued, a 400 Bad Request status code if the request is malformed, and a 500 Internal Server Error status code if an error occurs while enqueuing the build.
+It must also be followed with requests from the server to GitHub to retrieve the code in each commit so that the Build object will be complete in the database when the worker begins looking for it. Once it has retreived and formatted each commit and stored them in the DB, it returns.
 
 * '/ping'
 
@@ -113,7 +114,7 @@ This route will expose a ranking of the authors of commits by how many times the
 
 * '/builds/new'
 
-This route will expose the ability to rebuild any builds that have already been built.
+This route will expose the ability to rebuild any builds that have already been built. This allows users to see if older builds fail new tests.
 
 The Application Server must fulfill the following requirements:
 
