@@ -18,7 +18,8 @@ Database and displays them in HTML on the front end.
 
 # Details
 
-[Build objects](https://github.com/cs181f/project2/blob/master/Persisted_Objects.md)
+[Our build objects are defined here](https://github.com/cs181f/project2/blob/master/Persisted_Objects.md).
+MongoDB is schemaless, and will not ensure that objects match our expected build objects.
 
 We will be using [PyMongo](http://api.mongodb.org/python/current/) to communicate with the
 database. PyMongo will provide all of the required interactions with the database:
