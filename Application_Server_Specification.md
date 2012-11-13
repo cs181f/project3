@@ -89,6 +89,7 @@ If it is not building, this reponse would be in the following form:
 {
     status: 'success'
 }
+```
 
 2. HTML Frontend
 
