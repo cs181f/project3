@@ -1,5 +1,5 @@
 11/4 [Create Plan](https://github.com/cs181f/project3/issues/1)  
-11/11 Component Specifications  
+11/13 (delayed) Component Specifications  
 
 * [Linnea](https://github.com/cs181f/project3/issues/2)  
 * [Jesse](https://github.com/cs181f/project3/issues/4)  
