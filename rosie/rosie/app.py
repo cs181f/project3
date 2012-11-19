@@ -9,5 +9,11 @@ from flask import (
     url_for
 )
 
+from models import (
+    BuildQueue,
+    Build,
+    WorkerThread
+)
+
 # Linnea needs to add requirements for her mongoDB interaction
 
