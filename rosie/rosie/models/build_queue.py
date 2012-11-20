@@ -2,7 +2,10 @@
 The BuildQueue class is the in memory queue that WorkerThreads pull
 Builds that need to be built from.
 
-It inherits from the standard Python multithreaded Queue.
+It inherits from the standard Python multithreaded Queue. Documentation
+for that class can be found at:
+
+http://docs.python.org/2/library/queue.html
 """
 
 # Python stdlib requirements for Queue
