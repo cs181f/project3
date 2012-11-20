@@ -22,7 +22,7 @@ class WorkerThread(threading.Thread()):
         # stores BuildQueue in private variable
         self.queue = queue
         self.github_link = ''
-        self.current_build
+        self.current_build = None
 
     def run(self):
         """ PUBLIC: Starts worker in new Thread """
