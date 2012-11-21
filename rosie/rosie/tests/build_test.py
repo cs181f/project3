@@ -18,7 +18,7 @@ from models import (
 )
 
 
-class WorkerThreadTest(unittest.TestCase):
+class BuildTest(unittest.TestCase):
     """Test cases for Worker Thread"""
     @classmethod
     def setUpClass(self):
@@ -36,9 +36,9 @@ class WorkerThreadTest(unittest.TestCase):
             correctly inserted into the database """
     def test_build_from_database(self):
         """ Tests that Build objects are correctly retrieved from the
-            database given an ID (as would be used by the BuildQueue) 
+            database given an ID (as would be used by the BuildQueue)
             This one is possibly unnecessary given that we will be
             using a mongokit function """
-    
+
     def test_update_existing_build(self):
         """ Tests that updating a build with build results works correctly """
