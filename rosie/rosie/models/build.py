@@ -42,22 +42,22 @@ class Build(Document):
         'status',
         'error',
     ]
-    
+
     #self.to_json() will work!
-    
-    def fill(self, info)
+
+    def fill(self, info):
     # takes in JSON, fills in fields
     # can possibly use self.from_json?
     # calls self.validate()
     # DOES NOT call self.save, calls insert() from pymongo
     # api directly. this is so that we can get the ID which
     # will be returned to be stored in the build queue.
-    
+
     # use self.get_from_id(id) to find a build
-    
+
     def update_with_results(self, results):
     # updates fields
     # calls self.validate(), then self.save()
-    
+
     # all others should use mongokit or pymongo calls
-    
+
