@@ -1,6 +1,11 @@
+Overall, the API looks like it contains everything it requires.
+Most if not all of my comments are requests for clarifications
+and implementation details, specifically those that may have
+impact on the design of other components.
+
 ##API
 
-* MUST FIX: I'm presuming that @api.route is a decorator provided by
+MUST FIX: I'm presuming that @api.route is a decorator provided by
 the jsonify import - PLEASE link to the documentation
 and/or include a discussion for those of us who have
 not worked with flask extensively!
@@ -30,3 +35,5 @@ to test with (to check routing works, for example)?
 What about the database connection etc?
 
 MUST FIX: Probably missing _'s in line 46.
+
+## Verdict: all issues must be fixed to continue!

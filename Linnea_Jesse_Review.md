@@ -1,3 +1,7 @@
+Overall, the design looks fully featured and ready to be built.
+Most, if not all of my comments, mostly ask for clarifications
+on details that are not immediately obvious to me.
+
 ##Build Queue
 
 SHOULD FIX: Is there rationale for why we are using maxsize=0 (infinite)?
@@ -32,3 +36,5 @@ QUESTION: Any discussion on the thread's destruction?
 ##Worker Thread Test
 
 No comments.
+
+## Verdict: all issues must be fixed to continue!
