@@ -12,8 +12,8 @@
 * [Brennen](https://github.com/cs181f/project3/issues/6)  
 
 11/24 [Develop Test Plan](https://github.com/cs181f/project3/issues/8)  
-11/19-11/30 [Design Review](https://github.com/cs181f/project3/issues/9)  
-11/30 [Final Component Specifications](https://github.com/cs181f/project3/issues/10)  
+11/30 [Design Review](https://github.com/cs181f/project3/issues/9)  
+12/01 [Final Component Specifications](https://github.com/cs181f/project3/issues/10)  
 12/01 [Final Design](https://github.com/cs181f/project3/issues/11)  
 12/02 [Final Test Plan](https://github.com/cs181f/project3/issues/12)  
 12/02 [Post Mortem](https://github.com/cs181f/project3/issues/13)  
