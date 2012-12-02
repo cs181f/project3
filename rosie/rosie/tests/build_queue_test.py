@@ -13,6 +13,13 @@ WHITEBOX TESTING:
     def test_add_build_adds_build(self):
     def test_can_be_accessed_from_multiple_threads(self):
 
+BLACKBOX TESTING:
+
+    I include no black box tests because this class is essentially a wrapper
+    for the Queue class. Therefore, I only need to ensure that my wrapper
+    functions correctly call the Queue functions. Since I'm using my
+    understanding of the internal class, all those tests are white box tests. Therefore,
+    I include no black box tests.
 """
 
 import unittest
@@ -46,5 +53,11 @@ class BuildQueueTest(unittest.TestCase):
     def test_can_be_accessed_from_multiple_threads(self):
         """ Verifies that the Queue can be accessed and updated
         from multiple threads (ApplicationServer, WorkerThread for example)
+
+        This tests that the BuildQueue can be accessed from both the Application Server
+        and the BuildQueue; although, we will test it by creating two
+        Threads and updating/modifying a BuildQueue in both of them and checking
+        that the state of the BuildQueue is correct after both Threads are terminated
+    .
         """
 
