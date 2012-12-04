@@ -6,29 +6,39 @@ http://namlook.github.com/mongokit/index.html
 
 from mongokit import Document, Connection
 
+# sets up the connection to the database.
 connection = Connection()
 
-@connection.register
+# creates a schema that will be enforced by mongokit    
+# MongoKit uses unicode: http://api.mongodb.org/python/current/tutorial.html#a-note-on-unicode-strings
+# This is for compliance with the BSON format that it stores data in.
+# As a result, all strings will say unicode instead of string.
+# We do not need to worry about any of this; MongoKit will handle 
+# any string to unicode conversions necessary.
+@connection.register    # assigns the schema to the database
 class Build(Document):
-    __collection__ = 'build_coll'   # database structure! consider using these to track branches?
-    __database__ = 'build_db'       # database structure! consider using these to track branches?
+    __collection__ = 'build_coll'   # database structure
+    __database__ = 'build_db'       # database structure
     use_dot_notation = True
     dot_notation_warning = True
     structure = {
-        'repository': {
-            'url': unicode,
-            'name': unicode,
-            'description': unicode },
-        'url': unicode,
-        'author': {
-            'email': unicode,
-            'name': unicode },
-        'message': unicode,
-        'timestamp': unicode,
-        'ref': unicode,
-        'status': IS(0,1,2),
-        'error': unicode
+        'repository': {     
+            'url': unicode,     # url to the github repository            
+            'name': unicode,    # repository name
+            'description': unicode }, # description from github
+        'url': unicode,         # url to specific commit
+        'author': {             # author of commit
+            'email': unicode,   # author's email
+            'name': unicode },  # author's name
+        'message': unicode,     # the commit message describing changes made
+        'timestamp': unicode,   # time committed
+        'ref': unicode,         # branch information    
+        'status': IS(0,1,2),    # status of the build attempt. must be one of these numbers.
+        'error': unicode        # information about any build errors
     }
+    # these fields will be enforced by mongokit.
+    # When self.validate() is called, mongokit checks that these
+    #    fields exist and contain legal data.
     required_fields = [
         'repository.url',
         'repository.name',
@@ -43,21 +53,54 @@ class Build(Document):
         'error',
     ]
 
-    #self.to_json() will work!
+    
+    # The following two methods are documented here:
+    #    http://namlook.github.com/mongokit/json.html
+    """
+    self.to_json()
+        provided by MongoKit
+        returns a json version of the database object
+    """
+    
+    """
+    self.from_json(json)
+        provided by MongoKit
+        fills a database object with the provided json object
+    """
 
-    def fill(self, info):
-    # takes in JSON, fills in fields
-    # can possibly use self.from_json?
-    # calls self.validate()
-    # DOES NOT call self.save, calls insert() from pymongo
-    # api directly. this is so that we can get the ID which
-    # will be returned to be stored in the build queue.
+    # __init__
+    def __init__(self, json):
+        """ takes in a json string
+            Creates a new object and stores it in the database.
+            Returns the ID to store in the build queue
+            
+            While MongoKit contains a save() method, we are
+            bypassing it in favor of the PyMongo version in order
+            to obtain the internal ID number.
+        """
+        Document.__init__(self)
+        self.from_json(json)
+        self.validate()
+        id = self.collection.save(self, safe=safe, *args, **kwargs)
+        return id
 
-    # use self.get_from_id(id) to find a build
-
+    # update_with_results
     def update_with_results(self, results):
-    # updates fields
-    # calls self.validate(), then self.save()
-
-    # all others should use mongokit or pymongo calls
+        # updates fields
+        # calls self.save()
+        
+    # The following methods are documented here:
+    #    http://namlook.github.com/mongokit/query.html
+    
+    """
+    self.find({'_id': number})
+        provided by MongoKit
+        finds the build by ID number
+    """
+    
+    """
+    self.find() # with no arguments
+        provided by MongoKit
+        returns a cursor that will iterate through all of the builds
+    """
 
