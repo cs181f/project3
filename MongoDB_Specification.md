@@ -8,6 +8,9 @@ To communicate with MongoDB, we will use a ORM called PyMongo. This will easily 
 to create, update, and retrieve Build objects, without dealing with messy SQL queries. 
 This is how the Application Server and Worker Thread will communicate with the DB.
 
+Because MongoDB is schemaless, we will also use MongoKit as a layer to enforce a schema 
+and simplify some calls.
+
 The database is used to store the builds (and eventually the results of the build). 
 It interacts with the Application Server and the Worker Thread. When a new build is published, 
 the Application Server takes the information from Github, creates a new Build object and persists 
@@ -19,20 +22,30 @@ Database and displays them in HTML on the front end.
 # Details
 
 [Our build objects are defined here](https://github.com/cs181f/project2/blob/master/Persisted_Objects.md).
-MongoDB is schemaless, and will not ensure that objects match our expected build objects.
 
 We will be using [PyMongo](http://api.mongodb.org/python/current/) to communicate with the
-database. PyMongo will provide all of the required interactions with the database:
+database. PyMongo will provide all of the required interactions with the database. We will
+also use [MongoKit](http://namlook.github.com/mongokit/) as an intermediate layer for schema 
+control and some simplification.
 
-* [db.insert(myBuildObject)](http://api.mongodb.org/python/current/api/pymongo/collection.html#pymongo.collection.Collection.insert): inserts a new object into the database. When inserting a new object, PyMongo automatically adds an '_id' key-value pair to the object and returns it, which can handle the id string for the build object. We may also consider using generating ids in some other way. insert can take in a python collection of objects in order to insert multiple objects at once.
-* [db.find_one({key: value})](http://api.mongodb.org/python/current/api/pymongo/collection.html#pymongo.collection.Collection.find_one): returns the first object in the database found with a matching key-value pair. This is how we will retrieve build objects from the database, using the key "_id" and the value returned when the object was first inserted.
-* [db.update({key: value}, {$set: {key: value}})](http://api.mongodb.org/python/current/api/pymongo/collection.html#pymongo.collection.Collection.update): finds objects which contain a matching key-value pair to the first input and sets some other key to the specified value. Other arguments are possible; see the documentation.
+From MongoKit:
 
-Some other functions that may be useful:
+* class Build(Document): this inherits the Document class provided by MongoKit and includes
+    all of the schema control.
+* to_json(self): translates a Build into valid JSON
+* from_json(self): translates JSON into a Build object
+* validate(self): checks that the object is following the schema
+* find(self): gathers all builds
+* find(self, key:value): gathers matching builds
 
-* [db.find({key: value})](http://api.mongodb.org/python/current/api/pymongo/collection.html#pymongo.collection.Collection.find): same as find_one, but returns a Cursor object which means that we may iterate through multiple matches. May be useful to use.
+Overloaded:
+* __init__: in order to gain some extra functionality in the constructor
+* save: while PyMongo returns the ID number after saving to the database,
+    MongoKit does not. Therefore, we will be overloading the save method
+    to call the MongoKit save method.
 
-However, insert, find_one, and update should cover all of our requirements.
+Others:
+* update_with_results(self): handles updating after build attempts
 
 # Some notes
 
