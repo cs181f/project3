@@ -71,18 +71,23 @@ class Build(Document):
     # __init__
     def __init__(self, json):
         """ takes in a json string
-            Creates a new object and stores it in the database.
-            Returns the ID to store in the build queue
-            
-            While MongoKit contains a save() method, we are
-            bypassing it in favor of the PyMongo version in order
-            to obtain the internal ID number.
+            Creates a new object
         """
         Document.__init__(self)
         self.from_json(json)
         self.validate()
-        id = self.collection.save(self, safe=safe, *args, **kwargs)
-        return id
+    
+    # save
+    def save(self):
+        """ Stores an object in the database.
+            Returns the ID to store in the build queue
+            
+            While MongoKit contains a save() method, we are
+            bypassing it in favor of the PyMongo version in order
+            to obtain the internal ID number, which we will use
+            in the build queue.
+        """
+        return self.collection.save(self, safe=safe, *args, **kwargs)
 
     # update_with_results
     def update_with_results(self, results):
