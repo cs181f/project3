@@ -108,6 +108,10 @@ This route will show a short summary of the build status of all builds.
 
 This route will expose adjustable settings for the Rosie server.
 
+* '/get_settings'
+
+This route will return the current settings for display to the user.
+
 * '/blame'
 
 This route will expose a ranking of the authors of commits by how many times they have broken a build (yes, we like to shame people).
