@@ -87,6 +87,8 @@ class Build(Document):
             to obtain the internal ID number, which we will use
             in the build queue.
         """
+        # calls self.validate()
+        # this is the PyMongo save method:
         return self.collection.save(self, safe=safe, *args, **kwargs)
 
     # update_with_results
